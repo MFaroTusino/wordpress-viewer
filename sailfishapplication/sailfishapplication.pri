@@ -1,15 +1,15 @@
+include(../globals.pri)
+
 QT += declarative
 
 SOURCES += $$PWD/sailfishapplication.cpp
 HEADERS += $$PWD/sailfishapplication.h
 INCLUDEPATH += $$PWD
 
-TARGETPATH = /opt/sdk/bin
-target.path = $$TARGETPATH
+target.path = $$BINDIR
 
-DEPLOYMENT_PATH = /opt/sdk/share/$$TARGET
-qml.path = $$DEPLOYMENT_PATH
-desktop.path = /opt/sdk/share/applications
+qml.path = $$SHAREDIR
+desktop.path = $$APPLICATIONSDIR
 
 contains(CONFIG, desktop) {
     DEFINES *= DESKTOP
@@ -18,7 +18,7 @@ contains(CONFIG, desktop) {
 
 INSTALLS += target qml desktop
 
-DEFINES += DEPLOYMENT_PATH=\"\\\"\"$${DEPLOYMENT_PATH}/\"\\\"\"
+DEFINES += DEPLOYMENT_PATH=\"\\\"\"$${SHAREDIR}/\"\\\"\"
 
 CONFIG += link_pkgconfig
 packagesExist(qdeclarative-boostable) {

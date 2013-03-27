@@ -1,31 +1,26 @@
-Name:    My Nokia Blog
+Name:    Wordpress viewer
 Summary: My Nokia Blog client for Sailfish OS
 Version: 0.0.1~a1
 Release: 1
 Group:   Qt/Qt
-License: LICENSE
+License: BSD
 Sources:
     - "%{name}-%{version}.tar.bz2"
 Description: |
-  Short description of my SailfishOS Application
-# Qt Applications generally don't use configure and do use qmake
+  An universal wordpress viewer.
+PkgConfigBR:
+    - QtCore
+    - QtGui
+    - QtDeclarative
+    - QtNetwork
+    - QJson
+Requires:
+    - sailfishsilica
 Configure: none
 Builder: qmake
-# pkgconfigs we depend on to build
-PkgConfigBR:
-  - ""
-# Packages we depend on to build
-PkgBR:
-  - ""
-# Packages we require to run
-Requires:
-  - ""
+QMakeOptions:
+    - DEPLOYMENT_PREFIX=/usr/
 Files:
-  - "/opt"
-
-
-
-# This is a spectacle file.
-# It is a yaml file that uses specify to manage the spec file used to package the application.
-# See https://wiki.merproject.org/wiki/Spectacle for more information
+    - "%{_bindir}/wordpress-viewer"
+    - "%{_datadir}/wordpress-viewer/*.qml"
 

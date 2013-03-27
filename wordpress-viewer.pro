@@ -41,4 +41,5 @@ OTHER_FILES = \
     rpm/wordpress-viewer.yaml \
     pages/Index.qml \
     pages/Search.qml \
-    pages/PostPage.qml
+    pages/PostPage.qml \
+    globals.pri
