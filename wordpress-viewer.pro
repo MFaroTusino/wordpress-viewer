@@ -29,7 +29,8 @@ HEADERS += \
 qml.files = *.qml pages cover main.qml
 
 # Launcher files
-launchers.files = data/jollafr/wordpress-viewer-jollafr
+launchers.files = data/jollafr/wordpress-viewer-jollafr \
+                    data/utp/wordpress-viewer-utp \
 
 # .desktop files
 desktop.files = data/jollafr/wordpress-viewer-jollafr.desktop \
