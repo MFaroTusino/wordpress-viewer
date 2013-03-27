@@ -28,10 +28,6 @@ HEADERS += \
 # QML files and folders
 qml.files = *.qml pages cover main.qml
 
-# Launcher files
-launchers.files = data/jollafr/wordpress-viewer-jollafr \
-                    data/utp/wordpress-viewer-utp \
-
 # .desktop files
 desktop.files = data/jollafr/wordpress-viewer-jollafr.desktop \
                 data/utp/wordpress-viewer-utp.desktop \
@@ -47,10 +43,8 @@ OTHER_FILES = \
     rpm/wordpress-viewer.yaml \
     data/jollafr/jollafr.png \
     data/jollafr/wordpress-viewer-jollafr.desktop \
-    data/jollafr/wordpress-viewer-jollafr \
     data/utp/utp.png \
     data/utp/wordpress-viewer-utp.desktop \
-    data/utp/wordpress-viewer-utp \
     pages/About.qml \
     pages/Changelog.qml \
     pages/ContactUs.qml \
