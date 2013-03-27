@@ -2,5 +2,5 @@
 Type=Application
 Name=Jolla Fr
 Icon=/usr/share/wordpress-viewer/icons/jollafr.png
-Exec=invoker --type=e -s /usr/bin/wordpress-viewer-jollafr
+Exec=invoker --type=j -s /usr/bin/wordpress-viewer http://jollafr.org/api
 Comment=Jolla Fr blog viewer

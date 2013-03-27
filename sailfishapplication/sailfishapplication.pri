@@ -11,14 +11,13 @@ target.path = $$BINDIR
 qml.path = $$SHAREDIR/qml
 desktop.path = $$APPLICATIONSDIR
 icons.path = $$SHAREDIR/icons
-launchers.path = $$BINDIR
 
 contains(CONFIG, desktop) {
     DEFINES *= DESKTOP
     QT += opengl
 }
 
-INSTALLS += target qml desktop icons launchers
+INSTALLS += target qml desktop icons
 
 DEFINES += DEPLOYMENT_PATH=\"\\\"\"$${SHAREDIR}/qml/\"\\\"\"
 

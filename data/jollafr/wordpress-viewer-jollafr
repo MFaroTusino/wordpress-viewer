@@ -1,2 +1,0 @@
-#!/bin/sh
-invoker --type=j /usr/bin/wordpress-viewer http://jollafr.org/api
