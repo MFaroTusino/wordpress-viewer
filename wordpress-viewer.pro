@@ -28,18 +28,22 @@ HEADERS += \
 # QML files and folders
 qml.files = *.qml pages cover main.qml
 
-# The .desktop file
-desktop.files = wordpress-viewer.desktop
+# .desktop files
+desktop.files = data/jollafr/jollafr.desktop
+
+# Icon files
+icons.files = data/jollafr/jollafr.png
 
 # Please do not modify the following line.
 include(sailfishapplication/sailfishapplication.pri)
 
 OTHER_FILES = \
+    rpm/wordpress-viewer.yaml \
+    data/jollafr/jollafr.png \
+    data/jollafr/jollafr.desktop \
     pages/About.qml \
     pages/Changelog.qml \
     pages/ContactUs.qml \
-    rpm/wordpress-viewer.yaml \
     pages/Index.qml \
     pages/Search.qml \
     pages/PostPage.qml \
-    globals.pri

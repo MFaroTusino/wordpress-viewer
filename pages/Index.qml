@@ -7,7 +7,7 @@ Page {
 
     PostModel {
         id: postModel
-        api: "http://unleashthephones.com/api"
+        api: API
         method: "get_recent_posts"
         Component.onCompleted: load()
         onErrorChanged: console.debug(error)

@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Jolla Fr
+Icon=/usr/share/wordpress-viewer/icons/jollafr.png
+Exec=invoker --type=j /opt/sdk/bin/wordpress-viewer http://jollafr.org/api
+Comment=Jolla Fr blog viewer

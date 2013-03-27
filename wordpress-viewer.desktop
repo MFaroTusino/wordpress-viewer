@@ -1,9 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Wordpress viewer
-Icon=icon-launcher-gallery
-Exec=invoker --type=j -s /opt/sdk/bin/wordpress-viewer
-Comment=Wordpress blog viewer
-
-
-Name[en_AU]=wordpress-viewer.desktop

@@ -22,8 +22,9 @@ QMakeOptions:
     - DEPLOYMENT_PREFIX=/usr/
 Files:
     - "%{_bindir}/wordpress-viewer"
-    - "%{_datadir}/wordpress-viewer/main.qml"
-    - "%{_datadir}/wordpress-viewer/cover/*.qml"
-    - "%{_datadir}/wordpress-viewer/pages/*.qml"
-    - "%{_datadir}/applications/wordpress-viewer.desktop"
+    - "%{_datadir}/wordpress-viewer/qml/main.qml"
+    - "%{_datadir}/wordpress-viewer/qml/cover/*.qml"
+    - "%{_datadir}/wordpress-viewer/qml/pages/*.qml"
+    - "%{_datadir}/wordpress-viewer/icons/*.png"
+    - "%{_datadir}/applications/jollafr.desktop"
 

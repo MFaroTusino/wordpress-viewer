@@ -8,17 +8,18 @@ INCLUDEPATH += $$PWD
 
 target.path = $$BINDIR
 
-qml.path = $$SHAREDIR
+qml.path = $$SHAREDIR/qml
 desktop.path = $$APPLICATIONSDIR
+icons.path = $$SHAREDIR/icons
 
 contains(CONFIG, desktop) {
     DEFINES *= DESKTOP
     QT += opengl
 }
 
-INSTALLS += target qml desktop
+INSTALLS += target qml desktop icons
 
-DEFINES += DEPLOYMENT_PATH=\"\\\"\"$${SHAREDIR}/\"\\\"\"
+DEFINES += DEPLOYMENT_PATH=\"\\\"\"$${SHAREDIR/qml}/\"\\\"\"
 
 CONFIG += link_pkgconfig
 packagesExist(qdeclarative-boostable) {
