@@ -1,9 +1,9 @@
 [Desktop Entry]
 Type=Application
-Name=My Nokia Blog
+Name=Wordpress viewer
 Icon=icon-launcher-gallery
-Exec=invoker --type=j -s /opt/sdk/bin/mynokiablog
-Comment=Sailfish UI application
+Exec=invoker --type=j -s /opt/sdk/bin/wordpress-viewer
+Comment=Wordpress blog viewer
 
 
 Name[en_AU]=wordpress-viewer.desktop
