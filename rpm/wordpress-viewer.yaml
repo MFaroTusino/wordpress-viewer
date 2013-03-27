@@ -1,5 +1,5 @@
 Name:    wordpress-viewer
-Summary: My Nokia Blog client for Sailfish OS
+Summary: Wordpress viewer
 Version: 0.0.1~a1
 Release: 1
 Group:   Qt/Qt
@@ -25,6 +25,21 @@ Files:
     - "%{_datadir}/wordpress-viewer/qml/main.qml"
     - "%{_datadir}/wordpress-viewer/qml/cover/*.qml"
     - "%{_datadir}/wordpress-viewer/qml/pages/*.qml"
-    - "%{_datadir}/wordpress-viewer/icons/*.png"
-    - "%{_datadir}/applications/jollafr.desktop"
+SubPackages:
+    - Name: jollafr
+      Summary: JollaFr blog
+      Description: The Jollafr blog
+      Requires: wordpress-viewer
+      Group:   Qt/Qt
+      Files:
+          - "%{_datadir}/wordpress-viewer/icons/jollafr.png"
+          - "%{_datadir}/applications/wordpress-viewer-jollafr.desktop"
+    - Name: unleashthephones
+      Summary: Unleash the phones blog
+      Description: The Unleash the phones blog
+      Requires: wordpress-viewer
+      Group:   Qt/Qt
+      Files:
+          - "%{_datadir}/wordpress-viewer/icons/utp.png"
+          - "%{_datadir}/applications/wordpress-viewer-utp.desktop"
 

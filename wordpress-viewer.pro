@@ -29,10 +29,12 @@ HEADERS += \
 qml.files = *.qml pages cover main.qml
 
 # .desktop files
-desktop.files = data/jollafr/jollafr.desktop
+desktop.files = data/jollafr/wordpress-viewer-jollafr.desktop \
+                data/utp/wordpress-viewer-utp.desktop \
 
 # Icon files
-icons.files = data/jollafr/jollafr.png
+icons.files = data/jollafr/jollafr.png \
+                data/utp/utp.png
 
 # Please do not modify the following line.
 include(sailfishapplication/sailfishapplication.pri)
