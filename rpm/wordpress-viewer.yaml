@@ -29,17 +29,19 @@ SubPackages:
     - Name: jollafr
       Summary: JollaFr blog
       Description: The Jollafr blog
-      Requires: wordpress-viewer
+      Requires:
+            - wordpress-viewer
       Group:   Qt/Qt
       Files:
-          - "%{_datadir}/wordpress-viewer/icons/jollafr.png"
-          - "%{_datadir}/applications/wordpress-viewer-jollafr.desktop"
+            - "%{_datadir}/wordpress-viewer/icons/jollafr.png"
+            - "%{_datadir}/applications/wordpress-viewer-jollafr.desktop"
     - Name: unleashthephones
       Summary: Unleash the phones blog
       Description: The Unleash the phones blog
-      Requires: wordpress-viewer
+      Requires:
+            - wordpress-viewer
       Group:   Qt/Qt
       Files:
-          - "%{_datadir}/wordpress-viewer/icons/utp.png"
-          - "%{_datadir}/applications/wordpress-viewer-utp.desktop"
+            - "%{_datadir}/wordpress-viewer/icons/utp.png"
+            - "%{_datadir}/applications/wordpress-viewer-utp.desktop"
 
