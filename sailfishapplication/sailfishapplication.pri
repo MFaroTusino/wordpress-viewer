@@ -19,7 +19,7 @@ contains(CONFIG, desktop) {
 
 INSTALLS += target qml desktop icons
 
-DEFINES += DEPLOYMENT_PATH=\"\\\"\"$${SHAREDIR/qml}/\"\\\"\"
+DEFINES += DEPLOYMENT_PATH=\"\\\"\"$${SHAREDIR}/qml/\"\\\"\"
 
 CONFIG += link_pkgconfig
 packagesExist(qdeclarative-boostable) {
