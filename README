@@ -6,6 +6,8 @@ The project uses Qt to display and search for articles, as well as view and post
 
 The current project is built using Sailfish Silica Components, but, Qt being extremely flexible, can see this run on any Qt-supported platform, with minor changes to the QML files (and platfrom specific package dependencies).
 
+JSON API Plugin: http://wordpress.org/extend/plugins/json-api/
+
 Currently maintained by Michael Faro-Tusino (MFaroTusino) and Lucien Xu (SfietKonstantin)
 
  
