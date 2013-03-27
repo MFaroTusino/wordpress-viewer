@@ -1,2 +1,2 @@
 #!/bin/sh
-invoker --type=e /usr/bin/wordpress-viewer http://jollafr.org
+invoker --type=j /usr/bin/wordpress-viewer http://jollafr.org

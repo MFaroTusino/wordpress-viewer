@@ -14,6 +14,7 @@ PkgConfigBR:
     - QtDeclarative
     - QtNetwork
     - QJson
+    - qdeclarative-boostable
 Requires:
     - sailfishsilica
 Configure: none
