@@ -1,11 +1,11 @@
-Name:    Wordpress viewer
+Name:    wordpress-viewer
 Summary: My Nokia Blog client for Sailfish OS
 Version: 0.0.1~a1
 Release: 1
 Group:   Qt/Qt
 License: BSD
 Sources:
-    - "%{name}-%{version}.tar.bz2"
+    - "%{name}-%{version}.tar.gz"
 Description: |
   An universal wordpress viewer.
 PkgConfigBR:
@@ -22,5 +22,8 @@ QMakeOptions:
     - DEPLOYMENT_PREFIX=/usr/
 Files:
     - "%{_bindir}/wordpress-viewer"
-    - "%{_datadir}/wordpress-viewer/*.qml"
+    - "%{_datadir}/wordpress-viewer/main.qml"
+    - "%{_datadir}/wordpress-viewer/cover/*.qml"
+    - "%{_datadir}/wordpress-viewer/pages/*.qml"
+    - "%{_datadir}/applications/wordpress-viewer.desktop"
 
