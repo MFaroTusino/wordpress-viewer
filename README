@@ -1,0 +1,11 @@
+                         *****Wordpress-viewer*****
+
+This is an open-source project that is designed to access your wordpress content, via a JSON plugin.
+
+The project uses Qt to display and search for articles, as well as view and post comments. This *should* work on virtually any wordpress-based site (self-hosted or not), as long as the JSON plugin linked in this post is installed to your chosen site.
+
+The current project is built using Sailfish Silica Components, but, Qt being extremely flexible, can see this run on any Qt-supported platform, with minor changes to the QML files (and platfrom specific package dependencies).
+
+Currently maintained by Michael Faro-Tusino (MFaroTusino) and Lucien Xu (SfietKonstantin)
+
+ 
