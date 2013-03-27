@@ -2,5 +2,5 @@
 Type=Application
 Name=Unleash the phones
 Icon=/usr/share/wordpress-viewer/icons/utp.png
-Exec=invoker --type=j /opt/sdk/bin/wordpress-viewer http://unleashthephones.com/api
+Exec=invoker --type=e /usr/bin/wordpress-viewer-utp
 Comment=Unleash the phones blog

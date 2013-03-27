@@ -1,0 +1,2 @@
+#!/bin/sh
+invoker --type=e /usr/bin/wordpress-viewer http://unleashthephones.com/api
