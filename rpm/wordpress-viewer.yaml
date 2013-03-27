@@ -33,6 +33,7 @@ SubPackages:
             - wordpress-viewer
       Group:   Qt/Qt
       Files:
+            - "%{_bindir}/wordpress-viewer-jollafr"
             - "%{_datadir}/wordpress-viewer/icons/jollafr.png"
             - "%{_datadir}/applications/wordpress-viewer-jollafr.desktop"
     - Name: unleashthephones
@@ -42,6 +43,7 @@ SubPackages:
             - wordpress-viewer
       Group:   Qt/Qt
       Files:
+            - "%{_bindir}/wordpress-viewer-utp"
             - "%{_datadir}/wordpress-viewer/icons/utp.png"
             - "%{_datadir}/applications/wordpress-viewer-utp.desktop"
 
