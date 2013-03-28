@@ -41,6 +41,11 @@ Rectangle {
     color: "#33CCFF"
 
 
+  /*
+    Get infomration from the posts. Aim is to get the most recent title
+    as the coverPage
+    title
+
     PostModel {
         id: postModel
         api: API
@@ -48,6 +53,7 @@ Rectangle {
         Component.onCompleted: load()
         onErrorChanged: console.debug(error)
     }
+    */
 
 
     anchors.fill: parent
