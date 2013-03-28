@@ -8,6 +8,10 @@ The current project is built using Sailfish Silica Components, but, Qt being ext
 
 JSON API Plugin: http://wordpress.org/extend/plugins/json-api/
 
+Once the Plugin is set, you simply need to add http://yoursite.com/api to the arguments section of build, as well as set your own launcher icon. Finally, edit About.qml to be specific to your (and the site's) details.
+
 Currently maintained by Michael Faro-Tusino (MFaroTusino) and Lucien Xu (SfietKonstantin)
 
+
+                         *****       End       *****
  
