@@ -1,0 +1,5 @@
+Makefile
+moc/*
+obj/*
+*.pro.user
+wordpress-viewer
