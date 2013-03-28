@@ -32,14 +32,31 @@
 
 import QtQuick 1.1
 import Sailfish.Silica 1.0
+import BlogViewer 1.0
+
+
 
 Rectangle {
+     //property Post post
+    color: "#33CCFF"
+
+
+    PostModel {
+        id: postModel
+        api: API
+        method: "get_recent_posts"
+        Component.onCompleted: load()
+        onErrorChanged: console.debug(error)
+    }
+
+
     anchors.fill: parent
-    color: black
     Image {
         anchors.centerIn: parent
+        anchors.fill: parent
+        fillMode: Image.PreserveAspectFit
         id: coverImage
-        source: "/home/nemo/Pictures/5.jpg" //featured image from post
+        source: "/home/nemo/Pictures/utp.jpg" //featured image from post
     }
 
     Label {
@@ -47,17 +64,24 @@ Rectangle {
         color: theme.highlightColor
         font.pixelSize: theme.fontSizeLarge
         anchors.left: parent.left
-        text: "Most Recent Post Title"
+        //text: post.title
         wrapMode: Text.Wrap
         width: parent.width
     }
 
     CoverActionList {
         id: coverAction
+        CoverAction{
+            id: refreshPosts
+           // iconSource: refreshicon
+            //onClicked: postModel.load()
+        }
 
         CoverAction {
+            id: nextPost
+
             iconSource: "image://theme/icon-cover-next"
-            onTriggered: coverImage.source="/home/nemo/Pictures/mnb.png"
+           //onTriggered: nextPost image
         }
     }
 }
