@@ -29,44 +29,42 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
  */
 
-#ifndef POSTHELPER_H
-#define POSTHELPER_H
+#include "networkaccessmanager.h"
+#include <QtNetwork/QNetworkRequest>
 
-#include <QtCore/QObject>
-#include "cachemanager.h"
+static const char *N9_USER_AGENT = "Mozilla/5.0 (MeeGo; NokiaN9) AppleWebKit/534.13 \
+(KHTML, like Gecko) NokiaBrowser/8.5.0 Mobile Safari/534.13 ";
 
-class PostHelper : public QObject
+NetworkAccessManager::NetworkAccessManager(QObject *parent) :
+    QNetworkAccessManager(parent)
 {
-    Q_OBJECT
-    Q_PROPERTY(CacheManager * cacheManager READ cacheManager WRITE setCacheManager
-               NOTIFY cacheManagerChanged)
-    Q_PROPERTY(int screenWidth READ screenWidth WRITE setScreenWidth NOTIFY screenWidthChanged)
-    Q_PROPERTY(QString content READ content NOTIFY contentChanged)
-    Q_PROPERTY(bool loading READ loading NOTIFY loadingChanged)
-public:
-    explicit PostHelper(QObject *parent = 0);
-    CacheManager * cacheManager() const;
-    int screenWidth() const;
-    QString content() const;
-    bool loading() const;
-public slots:
-    void setCacheManager(CacheManager *cacheManager);
-    void setScreenWidth(int screenWidth);
-    void load(const QString &content);
-signals:
-    void cacheManagerChanged();
-    void screenWidthChanged();
-    void contentChanged();
-    void loadingChanged();
-    void loaded();
-private:
-    CacheManager *m_cacheManager;
-    int m_screenWidth;
-    QString m_content;
-    QMap<QUrl, QString> m_initialImages;
-private slots:
-    void slotRequestFinished(const QUrl &url, const QString &path);
+}
 
-};
+NetworkAccessManager::NetworkAccessManager(const QByteArray &userAgent, QObject *parent):
+    QNetworkAccessManager(parent)
+{
+    m_userAgent = userAgent;
+}
 
-#endif // POSTHELPER_H
+NetworkAccessManager * NetworkAccessManager::createN9NetworkAccessManager(QObject *parent)
+{
+    return new NetworkAccessManager(N9_USER_AGENT, parent);
+}
+
+void NetworkAccessManager::setUserAgent(const QByteArray &userAgent)
+{
+    m_userAgent = userAgent;
+}
+
+QNetworkReply * NetworkAccessManager::createRequest(Operation op, const QNetworkRequest &request,
+                                                    QIODevice *outgoingData)
+{
+    if (m_userAgent.isEmpty()) {
+        return QNetworkAccessManager::createRequest(op, request, outgoingData);
+    }
+
+    QNetworkRequest newRequest (request);
+    newRequest.setRawHeader("User-Agent", m_userAgent);
+    return QNetworkAccessManager::createRequest(op, newRequest, outgoingData);
+}
+

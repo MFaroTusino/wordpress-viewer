@@ -32,12 +32,33 @@
 
 import QtQuick 1.1
 import Sailfish.Silica 1.0
+import WordpressViewer 1.0
 import "pages"
 
-ApplicationWindow
-{
+ApplicationWindow {
+    id: window
     initialPage: Qt.resolvedUrl("pages/Index.qml")
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
+
+
+    CacheManager {
+        id: cacheManagerInstance
+    }
+
+    PostModel {
+        id: postModel
+        api: API
+        method: "get_recent_posts"
+        Component.onCompleted: load()
+        onErrorChanged: console.debug(error)
+    }
+
+    PostHelper {
+        id: postHelper
+        screenWidth: Math.min(window.width - 2 * theme.paddingMedium,
+                              window.height - 2 * theme.paddingMedium)
+        cacheManager: cacheManagerInstance
+    }
 }
 
 

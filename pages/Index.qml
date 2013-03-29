@@ -32,18 +32,9 @@
 
 import QtQuick 1.1
 import Sailfish.Silica 1.0
-import BlogViewer 1.0
 
 Page {
     id: page
-
-    PostModel {
-        id: postModel
-        api: API
-        method: "get_recent_posts"
-        Component.onCompleted: load()
-        onErrorChanged: console.debug(error)
-    }
 
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaListView {
@@ -56,7 +47,10 @@ Page {
         }
         model: postModel
         delegate: BackgroundItem {
-            onClicked: pageStack.push(Qt.resolvedUrl("PostPage.qml"), {post: model.post})
+            onClicked: {
+                postHelper.load(model.post.content)
+                pageStack.push(Qt.resolvedUrl("PostPage.qml"), {post: model.post})
+            }
 
             Label {
                 textFormat : Text.RichText

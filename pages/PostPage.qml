@@ -32,7 +32,7 @@
 
 import QtQuick 1.1
 import Sailfish.Silica 1.0
-import BlogViewer 1.0
+import WordpressViewer 1.0
 
 Page {
     id: page
@@ -86,15 +86,16 @@ Page {
         Flickable{
         id: flickArea
         anchors.top: pageHeader.bottom; anchors.bottom: page.bottom
-        anchors.left: page.left; anchors.leftMargin: theme.paddingLarge
+        anchors.left: page.left; anchors.leftMargin: theme.paddingMedium
         anchors.right: page.right; anchors.rightMargin: theme.paddingMedium
         contentWidth: flickArea.width; contentHeight: contentArea.height
         flickableDirection: Flickable.VerticalFlick
         clip: true
             Label{
                     id: contentArea
+                    visible: !postHelper.loading
                     width: flickArea.width
-                    text: post.content
+                    text: postHelper.content
                     wrapMode: Text.WordWrap
                     color: theme.primaryColor
                     font.pixelSize: theme.fontSizeLarge
@@ -102,6 +103,23 @@ Page {
                     anchors.right: parent.right; anchors.rightMargin: theme.paddingMedium
                     anchors.top: parent.top; anchors.topMargin: theme.paddingMedium
                 }
+        }
+
+        ProgressCircle {
+            id: progress
+            visible: postHelper.loading
+            anchors.centerIn: parent
+            value: postModel.progress
+            onVisibleChanged: {
+                progress.value = 0
+            }
+
+            Timer {
+                interval: 16
+                repeat: true
+                running: progress.visible
+                onTriggered: progress.value = (progress.value + 0.005) % 1.0
+            }
         }
     }
 

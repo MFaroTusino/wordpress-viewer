@@ -29,44 +29,24 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
  */
 
-#ifndef POSTHELPER_H
-#define POSTHELPER_H
+#ifndef NETWORKACCESSMANAGER_H
+#define NETWORKACCESSMANAGER_H
 
-#include <QtCore/QObject>
-#include "cachemanager.h"
+#include <QNetworkAccessManager>
 
-class PostHelper : public QObject
+class NetworkAccessManager : public QNetworkAccessManager
 {
     Q_OBJECT
-    Q_PROPERTY(CacheManager * cacheManager READ cacheManager WRITE setCacheManager
-               NOTIFY cacheManagerChanged)
-    Q_PROPERTY(int screenWidth READ screenWidth WRITE setScreenWidth NOTIFY screenWidthChanged)
-    Q_PROPERTY(QString content READ content NOTIFY contentChanged)
-    Q_PROPERTY(bool loading READ loading NOTIFY loadingChanged)
 public:
-    explicit PostHelper(QObject *parent = 0);
-    CacheManager * cacheManager() const;
-    int screenWidth() const;
-    QString content() const;
-    bool loading() const;
-public slots:
-    void setCacheManager(CacheManager *cacheManager);
-    void setScreenWidth(int screenWidth);
-    void load(const QString &content);
-signals:
-    void cacheManagerChanged();
-    void screenWidthChanged();
-    void contentChanged();
-    void loadingChanged();
-    void loaded();
+    explicit NetworkAccessManager(QObject *parent = 0);
+    explicit NetworkAccessManager(const QByteArray &userAgent, QObject *parent = 0);
+    static NetworkAccessManager * createN9NetworkAccessManager(QObject *parent = 0);
+    void setUserAgent(const QByteArray &userAgent);
+protected:
+    QNetworkReply * createRequest(Operation op, const QNetworkRequest &request,
+                                  QIODevice *outgoingData);
 private:
-    CacheManager *m_cacheManager;
-    int m_screenWidth;
-    QString m_content;
-    QMap<QUrl, QString> m_initialImages;
-private slots:
-    void slotRequestFinished(const QUrl &url, const QString &path);
-
+    QByteArray m_userAgent;
 };
 
-#endif // POSTHELPER_H
+#endif // NETWORKACCESSMANAGER_H

@@ -14,6 +14,8 @@ SOURCES += main.cpp \
     sharedobjectspool.cpp \
     postmodel.cpp \
     posthelper.cpp \
+    cachemanager.cpp \
+    networkaccessmanager.cpp
 
 # C++ headers
 HEADERS += \
@@ -24,6 +26,8 @@ HEADERS += \
     sharedobjectspool.h \
     postmodel.h \
     posthelper.h \
+    cachemanager.h \
+    networkaccessmanager.h
 
 # QML files and folders
 qml.files = *.qml pages cover main.qml

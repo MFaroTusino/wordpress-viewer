@@ -32,7 +32,7 @@
 
 import QtQuick 1.1
 import Sailfish.Silica 1.0
-import BlogViewer 1.0
+import WordpressViewer 1.0
 
 
 

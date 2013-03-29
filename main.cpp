@@ -40,12 +40,16 @@
 
 #include "sailfishapplication.h"
 #include "author.h"
+#include "cachemanager.h"
 #include "post.h"
+#include "posthelper.h"
 #include "postmodel.h"
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
     QScopedPointer<QApplication> app(Sailfish::createApplication(argc, argv));
+    app.data()->setOrganizationName("MFaroTusino");
+    app.data()->setApplicationName("wordpress-viewer");
 
     if (app.data()->arguments().count() != 2) {
         std::cout << "Wordpress viewer" << std::endl;
@@ -57,9 +61,11 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QScopedPointer<QDeclarativeView> view(Sailfish::createUninitializedView());
 
     // Register QML types
-    qmlRegisterType<Author>("BlogViewer", 1, 0, "Author");
-    qmlRegisterType<Post>("BlogViewer", 1, 0, "Post");
-    qmlRegisterType<PostModel>("BlogViewer", 1, 0, "PostModel");
+    qmlRegisterType<Author>("WordpressViewer", 1, 0, "Author");
+    qmlRegisterType<CacheManager>("WordpressViewer", 1, 0, "CacheManager");
+    qmlRegisterType<Post>("WordpressViewer", 1, 0, "Post");
+    qmlRegisterType<PostHelper>("WordpressViewer", 1, 0, "PostHelper");
+    qmlRegisterType<PostModel>("WordpressViewer", 1, 0, "PostModel");
 
     // Read the changelog
     QFile file("/home/nemo/Documents/changelog");
