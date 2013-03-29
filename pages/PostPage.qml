@@ -69,17 +69,10 @@ Page {
         "
     }
 
-    Label {
+    PostPageTitle {
         id: title
         visible: flickArea.contentY > 0
         text: post.title
-        anchors.top: parent.top; anchors.topMargin: theme.paddingMedium
-        anchors.left: parent.left; anchors.leftMargin: theme.paddingMedium + 100
-        anchors.right: parent.right; anchors.rightMargin: theme.paddingMedium
-        wrapMode: Text.WordWrap
-        font.pixelSize: theme.fontSizeLarge
-        color: theme.highlightColor
-        horizontalAlignment: Text.AlignRight
     }
 
     Item {
@@ -95,18 +88,10 @@ Page {
             flickableDirection: Flickable.VerticalFlick
 
 
-            Label {
+            PostPageTitle {
                 id: clonedTitle
                 text: post.title
-                anchors.top: parent.top; anchors.topMargin: theme.paddingMedium
-                anchors.left: parent.left; anchors.leftMargin: theme.paddingMedium + 100
-                anchors.right: parent.right; anchors.rightMargin: theme.paddingMedium
-                wrapMode: Text.WordWrap
-                font.pixelSize: theme.fontSizeLarge
-                color: theme.highlightColor
-                horizontalAlignment: Text.AlignRight
             }
-
             Label {
                 id: label
                 visible: !postHelper.loading
@@ -114,7 +99,6 @@ Page {
                 text: postHelper.content
                 wrapMode: Text.WordWrap
                 color: theme.primaryColor
-                font.pixelSize: theme.fontSizeLarge
                 anchors.left: parent.left; anchors.leftMargin: theme.paddingMedium
                 anchors.right: parent.right; anchors.rightMargin: theme.paddingMedium
                 anchors.top: clonedTitle.bottom
