@@ -33,79 +33,113 @@
 import QtQuick 1.1
 import Sailfish.Silica 1.0
 import WordpressViewer 1.0
+import Qt.labs.shaders 1.0
 
 Page {
     id: page
+    property Post post
 
-   /* SilicaFlickable {
-        id: pulleyMenu
+
+    ShaderEffectItem {
+        visible: flickArea.contentY > 0
+        property variant source: ShaderEffectSource {
+            sourceItem: flickAreaContainer
+            hideSource: flickArea.contentY > 0
+        }
+        property int titleHeight: title.height + theme.paddingMedium
+        property int separatorHeight: theme.paddingLarge
+
+        property real _titleHeightRatio: 1 - titleHeight / height
+        property real _titleHeightAndSeparatorRatio: 1 - (titleHeight + separatorHeight) / height
+
+
+        anchors.fill: flickAreaContainer
+
+        fragmentShader: "
+        varying highp vec2 qt_TexCoord0;
+        uniform float _titleHeightRatio;
+        uniform float _titleHeightAndSeparatorRatio;
+        uniform sampler2D source;
+        void main(void)
+        {
+            lowp vec4 textureColor = texture2D(source, qt_TexCoord0.st);
+            gl_FragColor = smoothstep(_titleHeightRatio, _titleHeightAndSeparatorRatio,
+                                      qt_TexCoord0.y)
+                           * textureColor;
+        }
+        "
+    }
+
+    Label {
+        id: title
+        visible: flickArea.contentY > 0
+        text: post.title
+        anchors.top: parent.top; anchors.topMargin: theme.paddingMedium
+        anchors.left: parent.left; anchors.leftMargin: theme.paddingMedium + 100
+        anchors.right: parent.right; anchors.rightMargin: theme.paddingMedium
+        wrapMode: Text.WordWrap
+        font.pixelSize: theme.fontSizeLarge
+        color: theme.highlightColor
+        horizontalAlignment: Text.AlignRight
+    }
+
+    Item {
+        id: flickAreaContainer
         anchors.fill: parent
-        anchors.bottom: flickArea.top; anchors.top: page.top
-      */  PageHeader {
-            id: pageHeader
-             title: post.title
-           /*
-            Please look at making this truncated
-            By making it page header outside flickable,
-            the post will slide under the content and not above it
-            */
-        }
 
-        // Pages referred to in pulley not yet implemented
-  //    PullDownMenu {
-    //        MenuItem {
-      //          text: "Author"
-    //            onClicked: pageStack.push(Qt.resolvedUrl("Comments.qml"))
-    //            }
-//            MenuItem{
-//                text: "Comments"
-//                onClicked: pageStack.push(Qt.resolvedUrl("Comments.qml"))
-//            }
-
-//            MenuItem{
-//                text: "Share"
-//                onClicked: pageStack.push(Qt.resolvedUrl("Share.qml"))
-//            }
-   // }
+        SilicaFlickable {
+            id: flickArea
+            anchors.fill: parent
+            contentWidth: flickArea.width
+            contentHeight: clonedTitle.height + label.height + 2 * theme.paddingMedium
+                           + theme.paddingLarge
+            flickableDirection: Flickable.VerticalFlick
 
 
-        // Tell SilicaFlickable the height of its content.
-        //contentHeight: childrenRect.height
-  //  }
+            Label {
+                id: clonedTitle
+                text: post.title
+                anchors.top: parent.top; anchors.topMargin: theme.paddingMedium
+                anchors.left: parent.left; anchors.leftMargin: theme.paddingMedium + 100
+                anchors.right: parent.right; anchors.rightMargin: theme.paddingMedium
+                wrapMode: Text.WordWrap
+                font.pixelSize: theme.fontSizeLarge
+                color: theme.highlightColor
+                horizontalAlignment: Text.AlignRight
+            }
 
- property Post post
-/*
-  This is currently set up so that there is a page header that
-  is always visible, along with the pageStack indicators. The
-  postContent is flickable and will move beneath the header on
-  scroll.
+            Label {
+                id: label
+                visible: !postHelper.loading
+                width: flickArea.width
+                text: postHelper.content
+                wrapMode: Text.WordWrap
+                color: theme.primaryColor
+                font.pixelSize: theme.fontSizeLarge
+                anchors.left: parent.left; anchors.leftMargin: theme.paddingMedium
+                anchors.right: parent.right; anchors.rightMargin: theme.paddingMedium
+                anchors.top: clonedTitle.bottom
+                anchors.topMargin: theme.paddingMedium + theme.paddingLarge
+            }
 
-  However, attempting to add pulley eithr makes the Text sit at (0,0) above the
-  Stack indicator and header, or no content is displayed at all
-  */
-        Flickable{
-        id: flickArea
-        anchors.top: pageHeader.bottom; anchors.bottom: page.bottom
-        anchors.left: page.left; anchors.leftMargin: theme.paddingMedium
-        anchors.right: page.right; anchors.rightMargin: theme.paddingMedium
-        contentWidth: flickArea.width; contentHeight: contentArea.height
-        flickableDirection: Flickable.VerticalFlick
-        clip: true
-            Label{
-                    id: contentArea
-                    visible: !postHelper.loading
-                    width: flickArea.width
-                    text: postHelper.content
-                    wrapMode: Text.WordWrap
-                    color: theme.primaryColor
-                    font.pixelSize: theme.fontSizeLarge
-                    anchors.left: parent.left; anchors.leftMargin: theme.paddingMedium
-                    anchors.right: parent.right; anchors.rightMargin: theme.paddingMedium
-                    anchors.top: parent.top; anchors.topMargin: theme.paddingMedium
+            PullDownMenu {
+                MenuItem {
+                    text: "Author"
+                    onClicked: pageStack.push(Qt.resolvedUrl("Comments.qml"))
+                    }
+                MenuItem{
+                    text: "Share"
+                    onClicked: pageStack.push(Qt.resolvedUrl("Share.qml"))
                 }
+                MenuItem{
+                    text: "Comments"
+                    onClicked: pageStack.push(Qt.resolvedUrl("Comments.qml"))
+                }
+            }
         }
+    }
 
-        ProgressCircle {
+    ProgressCircle {
             id: progress
             visible: postHelper.loading
             anchors.centerIn: parent
@@ -121,6 +155,4 @@ Page {
                 onTriggered: progress.value = (progress.value + 0.005) % 1.0
             }
         }
-    }
-
-
+}

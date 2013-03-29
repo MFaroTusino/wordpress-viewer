@@ -34,10 +34,14 @@
 #include <QtCore/QRegExp>
 #include <QtCore/QStringList>
 
-static const char * IMG_REGEXP = "(<img[^>]*>)";
+// TODO: take in account WP style
+// TODO: better URL displays
+
+static const char *IMG_REGEXP = "(<img[^>]*>)";
 static const char *URL_REGEXP = "src=(\"|')([^(\"|'']*)(\"|')";
 static const char *WIDTH_REGEXP = "width=(\"|')([^(\"|'']*)(\"|')";
 static const char *HEIGHT_REGEXP = "height=(\"|')([^(\"|'']*)(\"|')";
+
 
 PostHelper::PostHelper(QObject *parent)
     : QObject(parent)
@@ -182,8 +186,6 @@ void PostHelper::slotRequestFinished(const QUrl &url, const QString &path)
         m_initialImages.remove(url);
         m_content.replace(data, finalData);
         emit contentChanged();
-
-        qDebug() << finalData;
     }
 
     if (m_initialImages.isEmpty()) {
