@@ -41,16 +41,15 @@ Page {
 
 
     ShaderEffectItem {
-        visible: flickArea.contentY > 0
         property variant source: ShaderEffectSource {
             sourceItem: flickAreaContainer
-            hideSource: flickArea.contentY > 0
+            hideSource: true
         }
         property int titleHeight: title.height + theme.paddingMedium
         property int separatorHeight: theme.paddingLarge
 
-        property real _titleHeightRatio: 1 - titleHeight / height
-        property real _titleHeightAndSeparatorRatio: 1 - (titleHeight + separatorHeight) / height
+        property real _titleHeightRatio: flickArea.contentY > 0 ? 1 - titleHeight / height : 0
+        property real _titleHeightAndSeparatorRatio: flickArea.contentY > 0 ? 1 - (titleHeight + separatorHeight) / height : 0
 
 
         anchors.fill: flickAreaContainer
