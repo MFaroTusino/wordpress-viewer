@@ -52,8 +52,8 @@ class Post: public QObject
     Q_PROPERTY(QString excerpt READ excerpt NOTIFY excerptChanged)
     Q_PROPERTY(QDateTime date READ date NOTIFY dateChanged)
     Q_PROPERTY(QDateTime modified READ modified NOTIFY modifiedChanged)
-    Q_PROPERTY(Author * author READ author NOTIFY authorChanged)
-    Q_PROPERTY(QList<Comment *> comments READ comments NOTIFY commentsChanged)
+    Q_PROPERTY(Author *author READ author NOTIFY authorChanged)
+    Q_PROPERTY(QList<Comment*> comments READ comments NOTIFY commentsChanged)
 public:
     explicit Post(QObject *parent = 0);
     static Post * create(const JsonObject &data, SharedObjectsPool *pool, QObject *parent = 0);
@@ -66,7 +66,7 @@ public:
     QDateTime date() const;
     QDateTime modified() const;
     Author * author() const;
-    QList<Comment *> comments() const;
+    QList<Comment*> comments() const;
 public slots:
     void update(const JsonObject &data, SharedObjectsPool *pool);
 signals:

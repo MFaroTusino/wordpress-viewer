@@ -105,7 +105,7 @@ Author * Post::author() const
     return m_author;
 }
 
-QList<Comment *> Post::comments() const
+QList<Comment*> Post::comments() const
 {
     return m_comments;
 }
