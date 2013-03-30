@@ -41,9 +41,21 @@
 #include "sailfishapplication.h"
 #include "author.h"
 #include "cachemanager.h"
+#include "comment.h"
 #include "post.h"
 #include "posthelper.h"
 #include "postmodel.h"
+
+static const char *NOSHADERS = "-noshaders";
+
+void help() {
+    std::cout << "Wordpress viewer" << std::endl;
+    std::cout << "Usage: wordpress-viewer [-noshaders] api" << std::endl;
+    std::cout << std::endl;
+    std::cout << "  api: link to the JSON API of a blog." << std::endl;
+    std::cout << "  -noshaders: disable shaders. Useful when there is no HW acceleration"
+              << std::endl;
+}
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
@@ -51,18 +63,42 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     app.data()->setOrganizationName("MFaroTusino");
     app.data()->setApplicationName("wordpress-viewer");
 
-    if (app.data()->arguments().count() != 2) {
-        std::cout << "Wordpress viewer" << std::endl;
-        std::cout << "Please specify the API: ./wordpressviewer http://myblog.com/api" << std::endl;
+    int argumentCount = app.data()->arguments().count();
+    if (argumentCount < 2 || argumentCount > 3) {
+        help();
         return 0;
     }
-    QString api = app.data()->arguments().at(1);
+
+    bool noShaders = false;
+    QString api;
+    QString firstArgument = app.data()->arguments().at(1);
+    if (argumentCount == 2) {
+        if (firstArgument == NOSHADERS) {
+            help();
+            return 0;
+        } else {
+            api = firstArgument;
+        }
+    } else {
+        QString secondArgument = app.data()->arguments().at(2);
+        if (firstArgument == NOSHADERS) {
+            api = secondArgument;
+            noShaders = true;
+        } else if (secondArgument == NOSHADERS) {
+            api = firstArgument;
+            noShaders = true;
+        } else {
+            help();
+            return 0;
+        }
+    }
 
     QScopedPointer<QDeclarativeView> view(Sailfish::createUninitializedView());
 
     // Register QML types
     qmlRegisterType<Author>("WordpressViewer", 1, 0, "Author");
     qmlRegisterType<CacheManager>("WordpressViewer", 1, 0, "CacheManager");
+    qmlRegisterType<Comment>("WordpressViewer", 1, 0, "Comment");
     qmlRegisterType<Post>("WordpressViewer", 1, 0, "Post");
     qmlRegisterType<PostHelper>("WordpressViewer", 1, 0, "PostHelper");
     qmlRegisterType<PostModel>("WordpressViewer", 1, 0, "PostModel");
@@ -74,6 +110,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QString line = in.readAll();
     view.data()->rootContext()->setContextProperty("CHANGELOG", line);
     view.data()->rootContext()->setContextProperty("API", api);
+    view.data()->rootContext()->setContextProperty("SHADERS", !noShaders);
 
     Sailfish::initializeView(view.data(), "main.qml");
     Sailfish::showView(view.data());

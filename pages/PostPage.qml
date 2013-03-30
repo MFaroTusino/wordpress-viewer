@@ -38,18 +38,22 @@ import Qt.labs.shaders 1.0
 Page {
     id: page
     property Post post
+    onPostChanged: console.debug(post.comments)
 
 
     ShaderEffectItem {
+        visible: SHADERS
         property variant source: ShaderEffectSource {
             sourceItem: flickAreaContainer
-            hideSource: true
+            hideSource: SHADERS
         }
         property int titleHeight: title.height + theme.paddingMedium
         property int separatorHeight: theme.paddingLarge
 
         property real _titleHeightRatio: flickArea.contentY > 0 ? 1 - titleHeight / height : 0
-        property real _titleHeightAndSeparatorRatio: flickArea.contentY > 0 ? 1 - (titleHeight + separatorHeight) / height : 0
+        property real _titleHeightAndSeparatorRatio: flickArea.contentY > 0
+                                                     ? 1 - (titleHeight + separatorHeight) / height
+                                                     : 0
 
 
         anchors.fill: flickAreaContainer
@@ -71,7 +75,7 @@ Page {
 
     PostPageTitle {
         id: title
-        visible: flickArea.contentY > 0
+        visible: flickArea.contentY > 0 && SHADERS
         text: post.title
     }
 
@@ -119,23 +123,38 @@ Page {
                     onClicked: pageStack.push(Qt.resolvedUrl("Comments.qml"))
                 }
             }
+
+            PushUpMenu {
+                MenuItem {
+                    text: "Author"
+                    onClicked: pageStack.push(Qt.resolvedUrl("Comments.qml"))
+                    }
+                MenuItem{
+                    text: "Share"
+                    onClicked: pageStack.push(Qt.resolvedUrl("Share.qml"))
+                }
+                MenuItem{
+                    text: "Comments"
+                    onClicked: pageStack.push(Qt.resolvedUrl("Comments.qml"))
+                }
+            }
         }
     }
 
     ProgressCircle {
-            id: progress
-            visible: postHelper.loading
-            anchors.centerIn: parent
-            value: postModel.progress
-            onVisibleChanged: {
-                progress.value = 0
-            }
-
-            Timer {
-                interval: 16
-                repeat: true
-                running: progress.visible
-                onTriggered: progress.value = (progress.value + 0.005) % 1.0
-            }
+        id: progress
+        visible: postHelper.loading
+        anchors.centerIn: parent
+        value: postModel.progress
+        onVisibleChanged: {
+            progress.value = 0
         }
+
+        Timer {
+            interval: 16
+            repeat: true
+            running: progress.visible
+            onTriggered: progress.value = (progress.value + 0.005) % 1.0
+        }
+    }
 }
