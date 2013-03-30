@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2013 Lucien XU <sfietkonstantin@free.fr>
+ * Copyright (C) 2013 Michael Faro-Tusino <dev.mfarotusino@live.com.au>
  *
  * You may use this file under the terms of the BSD license as follows:
  *
@@ -28,7 +29,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
  */
-
+ 
 #include "author.h"
 
 static const char *AUTHOR_ID_KEY = "id";
@@ -55,42 +56,42 @@ Author * Author::create(const JsonObject &data, QObject *parent)
     return author;
 }
 
-QString Author::id() const
+QString  Author::id() const
 {
     return m_id;
 }
 
-QString Author::slug() const
+QString  Author::slug() const
 {
     return m_slug;
 }
 
-QString Author::name() const
+QString  Author::name() const
 {
     return m_name;
 }
 
-QString Author::firstName() const
+QString  Author::firstName() const
 {
     return m_firstName;
 }
 
-QString Author::lastName() const
+QString  Author::lastName() const
 {
     return m_lastName;
 }
 
-QString Author::nickname() const
+QString  Author::nickname() const
 {
     return m_nickname;
 }
 
-QUrl Author::url() const
+QUrl  Author::url() const
 {
     return m_url;
 }
 
-QString Author::description() const
+QString  Author::description() const
 {
     return m_description;
 }

@@ -34,6 +34,7 @@
 
 #include <QtCore/QObject>
 #include "author.h"
+#include "comment.h"
 
 class SharedObjectsPool : public QObject
 {
@@ -41,8 +42,10 @@ class SharedObjectsPool : public QObject
 public:
     explicit SharedObjectsPool(QObject *parent = 0);
     Author * createAuthor(const JsonObject &jsonObject);
+    Comment * createComment(const JsonObject &jsonObject);
 private:
     QMap<QString, Author *> m_authors;
+    QMap<QString, Comment *> m_comments;
 
 };
 

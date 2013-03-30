@@ -50,3 +50,14 @@ Author * SharedObjectsPool::createAuthor(const JsonObject &jsonObject)
     return author;
 }
 
+Comment * SharedObjectsPool::createComment(const JsonObject &jsonObject)
+{
+    QString id = JSON_GET_STRING(jsonObject.value(ID_KEY));
+    if (m_comments.contains(id)) {
+        return m_comments.value(id);
+    }
+
+    Comment *comment = Comment::create(jsonObject);
+    m_comments.insert(id, comment);
+    return comment;
+}

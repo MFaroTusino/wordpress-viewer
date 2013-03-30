@@ -1,20 +1,21 @@
 /*
  * Copyright (C) 2013 Lucien XU <sfietkonstantin@free.fr>
+ * Copyright (C) 2013 Michael Faro-Tusino <dev.mfarotusino@live.com.au>
  *
  * You may use this file under the terms of the BSD license as follows:
  *
  * "Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
  * met:
- *   * Redistributions of source code must retain the above copyright
- *     notice, this list of conditions and the following disclaimer.
- *   * Redistributions in binary form must reproduce the above copyright
- *     notice, this list of conditions and the following disclaimer in
- *     the documentation and/or other materials provided with the
- *     distribution.
- *   * Neither the name of Jolla Ltd. nor the names of its contributors
- *     may be used to endorse or promote products derived from this
- *     software without specific prior written permission.
+ * * Redistributions of source code must retain the above copyright
+ * notice, this list of conditions and the following disclaimer.
+ * * Redistributions in binary form must reproduce the above copyright
+ * notice, this list of conditions and the following disclaimer in
+ * the documentation and/or other materials provided with the
+ * distribution.
+ * * Neither the name of Jolla Ltd. nor the names of its contributors
+ * may be used to endorse or promote products derived from this
+ * software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -28,7 +29,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
  */
-
+ 
 #include "post.h"
 #include "sharedobjectspool.h"
 #include "datetimeformat_p.h"
@@ -42,6 +43,7 @@ static const char *POST_EXCERPT_KEY = "excerpt";
 static const char *POST_DATE_KEY = "date";
 static const char *POST_MODIFIED_KEY = "modified";
 static const char *POST_AUTHOR_KEY = "author";
+static const char *POST_COMMENTS_KEY = "comments";
 
 Post::Post(QObject *parent)
     : QObject(parent)
@@ -58,49 +60,54 @@ Post * Post::create(const JsonObject &data, SharedObjectsPool *pool, QObject *pa
     return post;
 }
 
-QString Post::id() const
+QString  Post::id() const
 {
     return m_id;
 }
 
-QString Post::slug() const
+QString  Post::slug() const
 {
     return m_slug;
 }
 
-QUrl Post::url() const
+QUrl  Post::url() const
 {
     return m_url;
 }
 
-QString Post::title() const
+QString  Post::title() const
 {
     return m_title;
 }
 
-QString Post::content() const
+QString  Post::content() const
 {
     return m_content;
 }
 
-QString Post::excerpt() const
+QString  Post::excerpt() const
 {
     return m_excerpt;
 }
 
-QDateTime Post::date() const
+QDateTime  Post::date() const
 {
     return m_date;
 }
 
-QDateTime Post::modified() const
+QDateTime  Post::modified() const
 {
     return m_modified;
 }
 
-Author  * Post::author() const
+Author * Post::author() const
 {
     return m_author;
+}
+
+QList<Comment*> Post::comments() const
+{
+    return m_comments;
 }
 
 void Post::update(const JsonObject &data, SharedObjectsPool *pool)
@@ -140,6 +147,9 @@ bool Post::isValid(const JsonObject &data)
     if (!data.contains(POST_AUTHOR_KEY)) {
         return false;
     }
+    if (!data.contains(POST_COMMENTS_KEY)) {
+        return false;
+    }
     return true;
 }
 
@@ -158,6 +168,12 @@ void Post::setData(const JsonObject &data, SharedObjectsPool *pool, bool signalC
     QDateTime modified = QDateTime::fromString(modifiedString, DATE_TIME_FORMAT);
     JsonObject authorObject = JSON_GET_OBJECT(data.value(POST_AUTHOR_KEY));
     Author *author = pool->createAuthor(authorObject);
+    JsonArray commentsArray = JSON_GET_ARRAY(data.value(POST_COMMENTS_KEY));
+    QList<Comment*> comments;
+    foreach (JsonValue commentsEntry, commentsArray) {
+        JsonObject commentsObject = JSON_GET_OBJECT(commentsEntry);
+        comments.append(pool->createComment(commentsObject));
+    }
     if (m_id != id) {
         m_id = id;
         if (signalChange) {
@@ -210,6 +226,12 @@ void Post::setData(const JsonObject &data, SharedObjectsPool *pool, bool signalC
         m_author = author;
         if (signalChange) {
             emit authorChanged();
+        }
+    }
+    if (m_comments != comments) {
+        m_comments = comments;
+        if (signalChange) {
+            emit commentsChanged();
         }
     }
 }

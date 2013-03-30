@@ -11,6 +11,7 @@ lessThan(QT_MAJOR_VERSION, 5) {
 SOURCES += main.cpp \
     author.cpp \
     post.cpp \
+    comment.cpp \
     sharedobjectspool.cpp \
     postmodel.cpp \
     posthelper.cpp \
@@ -23,6 +24,7 @@ HEADERS += \
     datetimeformat_p.h \
     author.h \
     post.h \
+    comment.h \
     sharedobjectspool.h \
     postmodel.h \
     posthelper.h \
