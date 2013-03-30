@@ -32,7 +32,7 @@
 #ifndef NETWORKACCESSMANAGER_H
 #define NETWORKACCESSMANAGER_H
 
-#include <QNetworkAccessManager>
+#include <QtNetwork/QNetworkAccessManager>
 
 class NetworkAccessManager : public QNetworkAccessManager
 {

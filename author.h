@@ -40,25 +40,25 @@
 class Author: public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString  id READ id NOTIFY idChanged)
-    Q_PROPERTY(QString  slug READ slug NOTIFY slugChanged)
-    Q_PROPERTY(QString  name READ name NOTIFY nameChanged)
-    Q_PROPERTY(QString  firstName READ firstName NOTIFY firstNameChanged)
-    Q_PROPERTY(QString  lastName READ lastName NOTIFY lastNameChanged)
-    Q_PROPERTY(QString  nickname READ nickname NOTIFY nicknameChanged)
-    Q_PROPERTY(QUrl  url READ url NOTIFY urlChanged)
-    Q_PROPERTY(QString  description READ description NOTIFY descriptionChanged)
+    Q_PROPERTY(QString id READ id NOTIFY idChanged)
+    Q_PROPERTY(QString slug READ slug NOTIFY slugChanged)
+    Q_PROPERTY(QString name READ name NOTIFY nameChanged)
+    Q_PROPERTY(QString firstName READ firstName NOTIFY firstNameChanged)
+    Q_PROPERTY(QString lastName READ lastName NOTIFY lastNameChanged)
+    Q_PROPERTY(QString nickname READ nickname NOTIFY nicknameChanged)
+    Q_PROPERTY(QUrl url READ url NOTIFY urlChanged)
+    Q_PROPERTY(QString description READ description NOTIFY descriptionChanged)
 public:
     explicit Author(QObject *parent = 0);
     static Author * create(const JsonObject &data, QObject *parent = 0);
-    QString  id() const;
-    QString  slug() const;
-    QString  name() const;
-    QString  firstName() const;
-    QString  lastName() const;
-    QString  nickname() const;
-    QUrl  url() const;
-    QString  description() const;
+    QString id() const;
+    QString slug() const;
+    QString name() const;
+    QString firstName() const;
+    QString lastName() const;
+    QString nickname() const;
+    QUrl url() const;
+    QString description() const;
 public slots:
     void update(const JsonObject &data);
 signals:

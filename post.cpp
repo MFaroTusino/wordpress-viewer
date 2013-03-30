@@ -60,42 +60,42 @@ Post * Post::create(const JsonObject &data, SharedObjectsPool *pool, QObject *pa
     return post;
 }
 
-QString  Post::id() const
+QString Post::id() const
 {
     return m_id;
 }
 
-QString  Post::slug() const
+QString Post::slug() const
 {
     return m_slug;
 }
 
-QUrl  Post::url() const
+QUrl Post::url() const
 {
     return m_url;
 }
 
-QString  Post::title() const
+QString Post::title() const
 {
     return m_title;
 }
 
-QString  Post::content() const
+QString Post::content() const
 {
     return m_content;
 }
 
-QString  Post::excerpt() const
+QString Post::excerpt() const
 {
     return m_excerpt;
 }
 
-QDateTime  Post::date() const
+QDateTime Post::date() const
 {
     return m_date;
 }
 
-QDateTime  Post::modified() const
+QDateTime Post::modified() const
 {
     return m_modified;
 }
@@ -105,7 +105,7 @@ Author * Post::author() const
     return m_author;
 }
 
-QList<Comment*> Post::comments() const
+QList<Comment *> Post::comments() const
 {
     return m_comments;
 }

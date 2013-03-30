@@ -56,42 +56,42 @@ Author * Author::create(const JsonObject &data, QObject *parent)
     return author;
 }
 
-QString  Author::id() const
+QString Author::id() const
 {
     return m_id;
 }
 
-QString  Author::slug() const
+QString Author::slug() const
 {
     return m_slug;
 }
 
-QString  Author::name() const
+QString Author::name() const
 {
     return m_name;
 }
 
-QString  Author::firstName() const
+QString Author::firstName() const
 {
     return m_firstName;
 }
 
-QString  Author::lastName() const
+QString Author::lastName() const
 {
     return m_lastName;
 }
 
-QString  Author::nickname() const
+QString Author::nickname() const
 {
     return m_nickname;
 }
 
-QUrl  Author::url() const
+QUrl Author::url() const
 {
     return m_url;
 }
 
-QString  Author::description() const
+QString Author::description() const
 {
     return m_description;
 }

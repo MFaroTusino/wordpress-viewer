@@ -40,21 +40,21 @@
 class Comment: public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString  id READ id NOTIFY idChanged)
-    Q_PROPERTY(QString  name READ name NOTIFY nameChanged)
-    Q_PROPERTY(QString  url READ url NOTIFY urlChanged)
-    Q_PROPERTY(QDateTime  date READ date NOTIFY dateChanged)
-    Q_PROPERTY(QString  content READ content NOTIFY contentChanged)
-    Q_PROPERTY(QString  parent READ parent NOTIFY parentChanged)
+    Q_PROPERTY(QString id READ id NOTIFY idChanged)
+    Q_PROPERTY(QString name READ name NOTIFY nameChanged)
+    Q_PROPERTY(QString url READ url NOTIFY urlChanged)
+    Q_PROPERTY(QDateTime date READ date NOTIFY dateChanged)
+    Q_PROPERTY(QString content READ content NOTIFY contentChanged)
+    Q_PROPERTY(QString parent READ parent NOTIFY parentChanged)
 public:
     explicit Comment(QObject *parent = 0);
     static Comment * create(const JsonObject &data, QObject *parent = 0);
-    QString  id() const;
-    QString  name() const;
-    QString  url() const;
-    QDateTime  date() const;
-    QString  content() const;
-    QString  parent() const;
+    QString id() const;
+    QString name() const;
+    QString url() const;
+    QDateTime date() const;
+    QString content() const;
+    QString parent() const;
 public slots:
     void update(const JsonObject &data);
 signals:

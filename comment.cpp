@@ -55,32 +55,32 @@ Comment * Comment::create(const JsonObject &data, QObject *parent)
     return comment;
 }
 
-QString  Comment::id() const
+QString Comment::id() const
 {
     return m_id;
 }
 
-QString  Comment::name() const
+QString Comment::name() const
 {
     return m_name;
 }
 
-QString  Comment::url() const
+QString Comment::url() const
 {
     return m_url;
 }
 
-QDateTime  Comment::date() const
+QDateTime Comment::date() const
 {
     return m_date;
 }
 
-QString  Comment::content() const
+QString Comment::content() const
 {
     return m_content;
 }
 
-QString  Comment::parent() const
+QString Comment::parent() const
 {
     return m_parent;
 }

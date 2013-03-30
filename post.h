@@ -44,29 +44,29 @@ class SharedObjectsPool;
 class Post: public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString  id READ id NOTIFY idChanged)
-    Q_PROPERTY(QString  slug READ slug NOTIFY slugChanged)
-    Q_PROPERTY(QUrl  url READ url NOTIFY urlChanged)
-    Q_PROPERTY(QString  title READ title NOTIFY titleChanged)
-    Q_PROPERTY(QString  content READ content NOTIFY contentChanged)
-    Q_PROPERTY(QString  excerpt READ excerpt NOTIFY excerptChanged)
-    Q_PROPERTY(QDateTime  date READ date NOTIFY dateChanged)
-    Q_PROPERTY(QDateTime  modified READ modified NOTIFY modifiedChanged)
+    Q_PROPERTY(QString id READ id NOTIFY idChanged)
+    Q_PROPERTY(QString slug READ slug NOTIFY slugChanged)
+    Q_PROPERTY(QUrl url READ url NOTIFY urlChanged)
+    Q_PROPERTY(QString title READ title NOTIFY titleChanged)
+    Q_PROPERTY(QString content READ content NOTIFY contentChanged)
+    Q_PROPERTY(QString excerpt READ excerpt NOTIFY excerptChanged)
+    Q_PROPERTY(QDateTime date READ date NOTIFY dateChanged)
+    Q_PROPERTY(QDateTime modified READ modified NOTIFY modifiedChanged)
     Q_PROPERTY(Author * author READ author NOTIFY authorChanged)
-    Q_PROPERTY(QList<Comment*> comments READ comments NOTIFY commentsChanged)
+    Q_PROPERTY(QList<Comment *> comments READ comments NOTIFY commentsChanged)
 public:
     explicit Post(QObject *parent = 0);
     static Post * create(const JsonObject &data, SharedObjectsPool *pool, QObject *parent = 0);
-    QString  id() const;
-    QString  slug() const;
-    QUrl  url() const;
-    QString  title() const;
-    QString  content() const;
-    QString  excerpt() const;
-    QDateTime  date() const;
-    QDateTime  modified() const;
+    QString id() const;
+    QString slug() const;
+    QUrl url() const;
+    QString title() const;
+    QString content() const;
+    QString excerpt() const;
+    QDateTime date() const;
+    QDateTime modified() const;
     Author * author() const;
-    QList<Comment*> comments() const;
+    QList<Comment *> comments() const;
 public slots:
     void update(const JsonObject &data, SharedObjectsPool *pool);
 signals:
